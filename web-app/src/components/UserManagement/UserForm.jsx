@@ -200,6 +200,7 @@ export const UserForm = (props) => {
                             }}
                             value={values.college}
                             className={classes.input}
+                            placeholder="Search to load options"
                           />
                           <ErrorMessage name="college">
                             {(msg) => <div style={{ color: "red" }}>{msg}</div>}
