@@ -1,9 +1,9 @@
 # React-Assignment
 
-Clone the repo
-Open React-Asignment/web-app
-Run npm install - to install packages
-Run npm start - run project
+1.Clone the repo
+2.Open React-Asignment/web-app
+3.Run npm install - to install packages
+4.Run npm start - run project
 
 #Working
 
