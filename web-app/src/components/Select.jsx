@@ -8,14 +8,15 @@ const hobbies = [
   { value: "Drawing", label: "Drawing" },
 ];
 
-export const ReactSelect = (props) => {
+export const ReactSelect = ({ onChange, value, className }) => {
   return (
     <CreatableSelect
       isMulti
-      onChange={props.onChange}
+      onChange={onChange}
       options={hobbies}
       isSearchable
-      value={props.value}
+      value={value}
+      className={className}
     />
   );
 };

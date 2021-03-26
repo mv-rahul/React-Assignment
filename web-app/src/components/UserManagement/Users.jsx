@@ -42,8 +42,9 @@ export const Users = () => {
   const closeDialog = () => {
     setOpenDeleteConfirmation(false);
   };
-
-  const reversedList = userList && userList.reverse();
+  const sortedList = userList.slice().sort(function (a, b) {
+    return new Date(b.createdDate) - new Date(a.createdDate);
+  });
 
   return (
     <>
@@ -81,99 +82,96 @@ export const Users = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {reversedList &&
-                    reversedList.map((user, index) => (
-                      <TableRow key={user.id}>
-                        <TableCell>{++index}</TableCell>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{moment(user.dob).format("L")}</TableCell>
-                        {user.address.length > 15 ? (
+                  {sortedList.map((user, index) => (
+                    <TableRow key={user.id}>
+                      <TableCell>{++index}</TableCell>
+                      <TableCell>{user.name}</TableCell>
+                      <TableCell>{moment(user.dob).format("L")}</TableCell>
+                      {user.address.length > 15 ? (
+                        <Tooltip
+                          title={user.address}
+                          placement="bottom"
+                          TransitionComponent={Zoom}
+                        >
+                          <TableCell>{user.address.substr(0, 15)}...</TableCell>
+                        </Tooltip>
+                      ) : (
+                        <TableCell>{user.address}</TableCell>
+                      )}
+                      <TableCell>
+                        {user.gender ? user.gender.value : "-"}
+                      </TableCell>
+
+                      {user.college ? (
+                        user.college.value.length > 15 ? (
                           <Tooltip
-                            title={user.address}
+                            title={user.college.value}
                             placement="bottom"
                             TransitionComponent={Zoom}
                           >
                             <TableCell>
-                              {user.address.substr(0, 15)}...
+                              {user.college.value.substr(0, 15)}...
                             </TableCell>
                           </Tooltip>
                         ) : (
-                          <TableCell>{user.address}</TableCell>
-                        )}
-                        <TableCell>
-                          {user.gender ? user.gender.value : "-"}
-                        </TableCell>
+                          <TableCell>{user.college.value}</TableCell>
+                        )
+                      ) : (
+                        <TableCell>-</TableCell>
+                      )}
 
-                        {user.college ? (
-                          user.college.value.length > 15 ? (
-                            <Tooltip
-                              title={user.college.value}
-                              placement="bottom"
-                              TransitionComponent={Zoom}
-                            >
-                              <TableCell>
-                                {user.college.value.substr(0, 15)}...
-                              </TableCell>
-                            </Tooltip>
-                          ) : (
-                            <TableCell>{user.college.value}</TableCell>
-                          )
-                        ) : (
-                          <TableCell>-</TableCell>
-                        )}
-
-                        {user.hobbies ? (
-                          user.hobbies.length > 2 ? (
-                            <Tooltip
-                              title={user.hobbies
-                                .map((item, ind) => item.value)
-                                .toString()}
-                              placement="bottom"
-                              TransitionComponent={Zoom}
-                            >
-                              <TableCell>
-                                {user.hobbies[0].value}, {user.hobbies[1].value}
-                                , {user.hobbies[2].value}...
-                              </TableCell>
-                            </Tooltip>
-                          ) : (
+                      {user.hobbies ? (
+                        user.hobbies.length > 2 ? (
+                          <Tooltip
+                            title={user.hobbies
+                              .map((item, ind) => item.value)
+                              .toString()}
+                            placement="bottom"
+                            TransitionComponent={Zoom}
+                          >
                             <TableCell>
-                              {user.hobbies.map((item, ind) => {
-                                if (ind === user.hobbies.length - 1) {
-                                  return item.value;
-                                } else return `${item.value},`;
-                              })}
+                              {user.hobbies[0].value}, {user.hobbies[1].value},{" "}
+                              {user.hobbies[2].value}...
                             </TableCell>
-                          )
+                          </Tooltip>
                         ) : (
-                          <TableCell>-</TableCell>
-                        )}
-                        <TableCell>
-                          <Grid container direction="row" spacing={1}>
-                            <Grid item>
-                              <Fab
-                                size="small"
-                                aria-label="edit"
-                                className={classes.edit}
-                                onClick={() => openModal(user.id)}
-                              >
-                                <EditIcon />
-                              </Fab>
-                            </Grid>
-                            <Grid item>
-                              <Fab
-                                size="small"
-                                aria-label="delete"
-                                className={classes.delete}
-                                onClick={() => openDialog(user.id)}
-                              >
-                                <DeleteIcon />
-                              </Fab>
-                            </Grid>
+                          <TableCell>
+                            {user.hobbies.map((item, ind) => {
+                              if (ind === user.hobbies.length - 1) {
+                                return item.value;
+                              } else return `${item.value},`;
+                            })}
+                          </TableCell>
+                        )
+                      ) : (
+                        <TableCell>-</TableCell>
+                      )}
+                      <TableCell>
+                        <Grid container direction="row" spacing={1}>
+                          <Grid item>
+                            <Fab
+                              size="small"
+                              aria-label="edit"
+                              className={classes.edit}
+                              onClick={() => openModal(user.id)}
+                            >
+                              <EditIcon />
+                            </Fab>
                           </Grid>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                          <Grid item>
+                            <Fab
+                              size="small"
+                              aria-label="delete"
+                              className={classes.delete}
+                              onClick={() => openDialog(user.id)}
+                            >
+                              <DeleteIcon />
+                            </Fab>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </Paper>
