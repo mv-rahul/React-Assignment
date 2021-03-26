@@ -42,6 +42,8 @@ export const Users = () => {
   const closeDialog = () => {
     setOpenDeleteConfirmation(false);
   };
+
+  //sort list to print newly added element at the top of the table
   const sortedList = userList.slice().sort(function (a, b) {
     return new Date(b.createdDate) - new Date(a.createdDate);
   });

@@ -1,4 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles";
+
+//material ui theme- styles are set for each components
 const customStyle = createMuiTheme({
   overrides: {
     // Style sheet name ⚛️
@@ -15,8 +17,6 @@ const customStyle = createMuiTheme({
         fontWeight: "bold",
         fontSize: "0.925rem",
         textAlign: "center",
-
-        // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
       },
     },
     MuiFab: {
@@ -62,7 +62,6 @@ const customStyle = createMuiTheme({
   },
   typography: {
     fontSize: 14,
-    // fontWeight:"500"
   },
 });
 

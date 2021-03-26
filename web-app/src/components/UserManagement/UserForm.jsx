@@ -23,6 +23,7 @@ const genderOptions = [
   { value: "Female", label: "Female" },
 ];
 
+//validation
 const userFormSchema = yupObject().shape({
   name: yupString().required("User name is required"),
   dob: yupString().required("Date of birth is required"),
@@ -57,7 +58,7 @@ export const UserForm = (props) => {
       createdDate: user.createdDate,
     };
   }
-
+  //function to load college options
   const loadOptions = async (inputValue, callback) => {
     const requestResults = await fetch(
       `http://universities.hipolabs.com/search?name=${inputValue}`
@@ -74,6 +75,7 @@ export const UserForm = (props) => {
     callback(modifiedResults);
   };
 
+  //invoked when submit is pressed- form
   const onSubmit = (values) => {
     console.log("val", values);
     console.log("val", new Date(values.createdDate));
@@ -254,6 +256,7 @@ export const UserForm = (props) => {
   );
 };
 
+//styles for component
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",

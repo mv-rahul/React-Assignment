@@ -1,3 +1,4 @@
+//action to create a user,values are passed and state is updated
 const createUser = async (store, values) => {
   try {
     console.log("values", values);
@@ -12,6 +13,7 @@ const createUser = async (store, values) => {
   }
 };
 
+//action to update a user, id and values are passed,particular user with ide is fetched and state is updated
 const updateUser = async (store, id, values) => {
   try {
     await store.update((state) => {
@@ -27,6 +29,7 @@ const updateUser = async (store, id, values) => {
   }
 };
 
+//action to delete a user,id is passed , user removed with matching id
 const deleteUser = async (store, id) => {
   try {
     await store.update((state) => {
