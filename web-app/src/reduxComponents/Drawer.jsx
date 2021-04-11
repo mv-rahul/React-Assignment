@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import { UserForm } from "./UserManagement/UserForm";
+import UserForm from "./UserManagement/UserForm";
 
 const drawerWidth = 240;
 
@@ -55,4 +55,7 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     minWidth: drawerWidth,
   },
+  // text: {
+  //   ["@media (max-width:1000px)"]: { color: "yellow" },
+  // },
 }));

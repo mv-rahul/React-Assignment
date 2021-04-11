@@ -13,17 +13,20 @@ import { Form, Formik, ErrorMessage } from "formik";
 import { v4 as uuidv4 } from "uuid";
 import AsyncSelect from "react-select/async";
 import { ReactSelect } from "../Select";
-// import { SnackBar } from "../SnackBar";
 import moment from "moment";
+import { connect } from "react-redux";
+import { createUser, updateUser } from "../../reduxStore/action/userActions";
+import { useSelector } from "react-redux";
 
 const genderOptions = [
   { value: "Male", label: "Male" },
   { value: "Female", label: "Female" },
 ];
 
-export const UserForm = (props) => {
+const UserForm = (props) => {
   const classes = useStyles();
-  const [userStatus, setUserStatus] = useState();
+  const userList = useSelector((state) => state.users.userList);
+
   let initialValues = {
     id: uuidv4(),
     name: "",
@@ -35,19 +38,19 @@ export const UserForm = (props) => {
     createdDate: moment().format(),
   };
 
-  //   if (props.id && userList.find((item) => item.id === props.id)) {
-  //     const user = userList.find((item) => item.id === props.id);
-  //     initialValues = {
-  //       id: user.id,
-  //       name: user.name,
-  //       dob: user.dob,
-  //       address: user.address,
-  //       gender: user.gender,
-  //       college: user.college,
-  //       hobbies: user.hobbies,
-  //       createdDate: user.createdDate,
-  //     };
-  //   }
+  if (props.id && userList.find((item) => item.id === props.id)) {
+    const user = userList.find((item) => item.id === props.id);
+    initialValues = {
+      id: user.id,
+      name: user.name,
+      dob: user.dob,
+      address: user.address,
+      gender: user.gender,
+      college: user.college,
+      hobbies: user.hobbies,
+      createdDate: user.createdDate,
+    };
+  }
   //function to load college options
   const loadOptions = async (inputValue, callback) => {
     const requestResults = await fetch(
@@ -68,16 +71,13 @@ export const UserForm = (props) => {
   //invoked when submit is pressed- form
   const onSubmit = (values) => {
     if (props.id === "new") {
-      console.log("new", values);
+      props.createUser(values);
     } else {
-      console.log("edit", values);
+      props.updateUser(props.id, values);
     }
     props.onClose();
   };
 
-  //   const onCloseSnackBar = () => {
-  //     setUserStatus(null);
-  //   };
   return (
     <>
       <Modal open={props.open} className={classes.modal}>
@@ -233,14 +233,20 @@ export const UserForm = (props) => {
           </Grid>
         </Paper>
       </Modal>
-      {/* <SnackBar
-        status={userStatus}
-        onCloseError={onCloseSnackBar}
-        color="green"
-      /> */}
     </>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    userList: state.userList,
+  };
+};
+
+export default connect(mapStateToProps, {
+  createUser,
+  updateUser,
+})(UserForm);
 
 //styles for component
 const useStyles = makeStyles((theme) => ({

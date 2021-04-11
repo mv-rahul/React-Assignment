@@ -3,9 +3,12 @@ import { Typography, Grid, TextField, InputAdornment } from "@material-ui/core";
 import { UserList } from "./UserList";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
+import { useSelector } from "react-redux";
 
 export const Users = () => {
   const classes = useStyles();
+  const userList = useSelector((state) => state.users.userList);
+
   return (
     <>
       <Grid container direction="column">
