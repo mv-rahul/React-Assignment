@@ -9,8 +9,10 @@ import { Store } from "./reduxStore/store";
 function App() {
   return (
     <Provider store={Store}>
-      <CssBaseline />
-      <AppViews />
+      <ThemeProvider>
+        <CssBaseline />
+        <AppViews />
+      </ThemeProvider>
     </Provider>
   );
 }

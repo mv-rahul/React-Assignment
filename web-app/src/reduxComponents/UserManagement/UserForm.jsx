@@ -105,7 +105,6 @@ const UserForm = (props) => {
                             onChange={handleChange}
                             value={values.name}
                             inputProps={{ maxLength: 25 }}
-                            className={classes.input}
                           />
                           <ErrorMessage name="name">
                             {(msg) => <div style={{ color: "red" }}>{msg}</div>}
@@ -126,7 +125,6 @@ const UserForm = (props) => {
                                 max: moment().format("YYYY-MM-DD"),
                               },
                             }}
-                            className={classes.input}
                           />
                           <ErrorMessage name="dob">
                             {(msg) => <div style={{ color: "red" }}>{msg}</div>}
@@ -148,7 +146,6 @@ const UserForm = (props) => {
                             value={values.address}
                             rows={1}
                             inputProps={{ maxLength: 150 }}
-                            className={classes.input}
                           />
                           <ErrorMessage name="address">
                             {(msg) => <div style={{ color: "red" }}>{msg}</div>}
@@ -164,7 +161,6 @@ const UserForm = (props) => {
                               setFieldValue("gender", value);
                             }}
                             value={values.gender}
-                            className={classes.input}
                           />
                           <ErrorMessage name="gender">
                             {(msg) => <div style={{ color: "red" }}>{msg}</div>}
@@ -184,7 +180,6 @@ const UserForm = (props) => {
                               setFieldValue("college", value);
                             }}
                             value={values.college}
-                            className={classes.input}
                             placeholder="Search to load options"
                           />
                           <ErrorMessage name="college">
@@ -200,7 +195,6 @@ const UserForm = (props) => {
                               setFieldValue("hobbies", value);
                             }}
                             value={values.hobbies}
-                            className={classes.input}
                           />
                           <ErrorMessage name="hobbies">
                             {(msg) => <div style={{ color: "red" }}>{msg}</div>}
@@ -263,6 +257,6 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(2),
   },
   input: {
-    width: "30em",
+    // width: "30em",
   },
 }));
